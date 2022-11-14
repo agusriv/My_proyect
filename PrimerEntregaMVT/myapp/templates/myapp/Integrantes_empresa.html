@@ -1,0 +1,50 @@
+{% extends 'myapp/base.html'%}
+
+{% block contenido %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajadores Empresa</title>
+    <!--Se da estilo a la tabla-->
+    <style>
+        table {
+            border: 1px solid;
+            width: 25%;
+        }
+        th {
+            border: 1px solid;
+        }
+        td {
+            border: 1px solid;
+            text-align: center;
+        }
+        </style>
+</head>
+<body>
+    <!--Se genera tabla con los datos de los familiares-->
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--Se utiliza un for para extraer los datos-->
+            {% for item in listaIntegrantesEmpresa %}
+          <tr>
+            <td>{{item.nombre}}</td>
+            <td>{{item.apellido}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    
+</body>
+</html>
+
+{% endblock %}

@@ -1,8 +1,9 @@
-# MY web 
+# My web 
 
-# Como ingresar a las rutas?
+## Como ingresar a las rutas?
 ("myweb/") es la ruta prinicipal para ingresar a las demas ponemos "myweb/" y las rutas que vemos a acontinuación son las disponibles
 
+## Rutas
 ```python
 urlpatterns = [
     path("", inicio, name= "web-inicio"),
@@ -12,6 +13,6 @@ urlpatterns = [
     path("listado/trabajadores/", listadoTrabajadores, name= "web-listado-trabajadores")
 ]
 ```
-# Funciones
+## Funciones
 
 En la web se pueden registrar personas, crear un trabajador y luego listarlos 

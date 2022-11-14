@@ -6,5 +6,7 @@ urlpatterns = [
     path("about", about, name= "web-about"),
     path("register/", register , name= "web-register"),
     path("crear/trabajador/", persona_formulario , name= "web-register-trabajador"),
-    path("listado/trabajadores/", listadoTrabajadores, name= "web-listado-trabajadores")
+    path("listado/trabajadores/", listadoTrabajadores, name= "web-listado-trabajadores"),
+    path("buscar/personas/", buscar_personas, name= "myweb-buscar-personas"),
+    path("buscar/personas/resultados/", resultado_busqueda_personas, name= "myweb-buscar-personas-resultados")
 ]

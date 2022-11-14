@@ -62,3 +62,12 @@ def listadoTrabajadores(request):
     
     # Retorna la variable documento
     return HttpResponse(documento)
+
+def buscar_personas(request):
+    return render(request, "myapp/busqueda_personas.html")
+
+def resultado_busqueda_personas(request):
+    nombre_persona = request.GET["nombre_persona"]
+
+    personas = Persona.objects.filter(nombre__icontains=nombre_persona)
+    return render(request, "myapp/resultado_busquedas_personas.html", {"personas": personas})

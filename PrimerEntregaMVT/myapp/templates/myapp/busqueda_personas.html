@@ -1,0 +1,16 @@
+{% extends 'myapp/base.html'%}
+
+{% block contenido %}
+
+<form action="{% url 'myweb-buscar-personas-resultados' %}" method="get">
+
+    <p> 
+        
+        Nombre de la persona: <input type="text" name="nombre_persona">
+        <input type="submit" value="Buscar">
+
+    </p>
+
+</form>
+
+{% endblock %}

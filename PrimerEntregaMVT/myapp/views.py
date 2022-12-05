@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from myapp.forms import RegisterFormulario, RegisterPersona
+from myapp.forms import RegisterFormulario, RegisterPersona, UserRegisterForm, UserEditForm
 from myapp.models import Register, Persona, IntegrantesEmpresa
 from django.template import loader
 
+# Login
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def inicio(request):
     return render(request, "myapp/inicio.html")
 
@@ -71,3 +77,40 @@ def resultado_busqueda_personas(request):
 
     personas = Persona.objects.filter(nombre__icontains=nombre_persona)
     return render(request, "myapp/resultado_busquedas_personas.html", {"personas": personas})
+
+def iniciar_sesion(request):
+
+    errors = ""
+
+    if request.method == "POST":
+        formulario = AuthenticationForm(request, data=request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+
+            user = authenticate(username=data["username"], password=data["password"])
+            
+            if user is not None:
+                login(request, user)
+                return redirect("web-inicio")
+            else:
+                return render(request, "myapp/login.html", {"form": formulario, "errors": "Credenciales invalidas"})
+        else:
+            return render(request, "myapp/login.html", {"form": formulario, "errors": formulario.errors})
+    formulario = AuthenticationForm()
+    return render(request, "myapp/login.html", {"form": formulario, "errors": errors})
+
+def registrar_usuario(request):
+
+    if request.method == "POST":
+        formulario = UserRegisterForm(request.POST)
+
+        if formulario.is_valid():
+            
+            formulario.save()
+            return redirect("web-inicio")
+        else:
+            return render(request, "myapp/register.html", { "form": formulario, "errors": formulario.errors})
+
+    formulario  = UserRegisterForm()
+    return render(request, "myapp/register.html", { "form": formulario})

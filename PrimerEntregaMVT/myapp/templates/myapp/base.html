@@ -24,9 +24,18 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="{% url 'web-inicio' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'web-about' %}">About</a></li> 
-                        <li class="nav-item"><a class="nav-link" href="{% url 'web-register' %}">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'web-listado-trabajadores' %}">Integrantes</a></li>
                     </ul>
+
+                    {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary" href="{% url 'auth-logout' %}">Logout</a>
+                    <p class="small text-muted mb-4 mb-lg-0">Hola {{request.user.username}}!</p>
+                    <img src="{{imagen_url}}" style="max-width: 55px;">
+                   {% else %}
+                    <a class="btn btn-primary" href="{% url 'auth-login' %}">Login</a>
+                    <p class="small text-muted mb-4 mb-lg-0">Hola Visitante</p>
+
+                   {% endif %}
+
                 </div>
             </div>
         </nav>

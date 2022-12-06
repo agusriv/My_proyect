@@ -114,3 +114,31 @@ def registrar_usuario(request):
 
     formulario  = UserRegisterForm()
     return render(request, "myapp/register.html", { "form": formulario})
+
+@login_required
+def editar_perfil(request):
+
+    usuario = request.user
+
+    if request.method == "POST":
+        # * cargar informacion en el formulario
+        formulario = UserEditForm(request.POST)
+
+        # ! validacion del formulario
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+
+            # * actualizacion del usuario con los datos del formulario
+            usuario.email = data["email"]
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+
+            usuario.save()
+            return redirect("web-inicio")
+        else:
+            return render(request, "myapp/editar_perfil.html", {"form": formulario, "erros": formulario.errors})
+    else:
+        # * crear formulario vacio
+        formulario = UserEditForm(initial = {"email": usuario.email, "first_name": usuario.first_name, "last_name": usuario.last_name})
+
+    return render(request, "myapp/editar_perfil.html", {"form": formulario})

@@ -16,4 +16,5 @@ urlpatterns = [
     path("register/", registrar_usuario, name="auth-register"),
     path("logout/", LogoutView.as_view(), name="auth-logout"),
     path("perfil/editar/", editar_perfil, name="auth-editar-perfil"),
+    path("perfil/avatar/", agregar_avatar, name="auth-avatar")
 ]

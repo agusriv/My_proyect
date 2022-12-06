@@ -22,3 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("myapp.urls")),
 ]
+
+# Agregar las URLS de archivos estaticos
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -20,10 +20,34 @@ def inicio(request):
         imagen_url = imagen_model.imagen.url
     else:
         imagen_url = ""
-    return render(request, "myapp/inicio.html", {"imagen_url": imagen_url})
+    return render(request, "myapp/base.html", {"imagen_url": imagen_url})
 
 def about(request):
-    return render(request, "myapp/about.html")
+    if request.user.is_authenticated:
+        imagen_model = Avatar.objects.filter(user= request.user.id).order_by("-id")[0]
+        imagen_url = imagen_model.imagen.url
+    else:
+        imagen_url = ""
+    return render(request, "myapp/about.html", {"imagen_url": imagen_url})
+
+# Aqui se encuentran las vistas para los post 
+def post1(request):
+    if request.user.is_authenticated:
+        imagen_model = Avatar.objects.filter(user= request.user.id).order_by("-id")[0]
+        imagen_url = imagen_model.imagen.url
+    else:
+        imagen_url = ""
+    return render(request, "myapp/DiseñoWeb_Post.html", {"imagen_url": imagen_url})
+
+def post2(request):
+    if request.user.is_authenticated:
+        imagen_model = Avatar.objects.filter(user= request.user.id).order_by("-id")[0]
+        imagen_url = imagen_model.imagen.url
+    else:
+        imagen_url = ""
+    return render(request, "myapp/Html_Post.html", {"imagen_url": imagen_url})
+
+
 
 def register(request):
     if request.method == "POST":

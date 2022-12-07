@@ -4,8 +4,10 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path("", inicio, name= "web-inicio"),
-    path("about", about, name= "web-about"),
+    path("about/", about, name= "web-about"),
     
+    path("Diseño-Web/", post1, name= "Post-Diseño-Web"),
+     path("Html-Web/", post2, name= "Post-HTML-Web"),
     
     path("crear/trabajador/", persona_formulario , name= "web-register-trabajador"),
     path("listado/trabajadores/", listadoTrabajadores, name= "web-listado-trabajadores"),
